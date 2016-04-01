@@ -8,8 +8,12 @@ Delicate environment variables are stored via https://github.com/elabs/econfig. 
 - twilio_sid
 - twilio_token
 
+Installing pg for postgress required:
+
+> sudo ARCHFLAGS="-arch x86_64" gem install pg
+
 For Jekyll it's:
-//item
+  //item
 guid
 title
 

@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160331224059) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "notifications", force: :cascade do |t|
     t.string   "guid"
     t.datetime "created_at", null: false
