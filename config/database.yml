@@ -11,7 +11,7 @@ default: &default
   username: root
   password:
   port: 3306
-  
+
 development:
   <<: *default
   database: db/development.sqlite3
