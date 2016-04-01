@@ -3449,3 +3449,33 @@ Started GET "/notifications" for ::1 at 2016-03-31 22:21:07 -0500
 Processing by NotificationsController#index as HTML
   [1m[35mNotification Load (0.2ms)[0m  SELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" DESC LIMIT 1
 Completed 200 OK in 1268ms (Views: 0.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/notifications" for ::1 at 2016-03-31 22:25:45 -0500
+Processing by NotificationsController#index as HTML
+  [1m[36mNotification Load (0.1ms)[0m  [1mSELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" DESC LIMIT 1[0m
+Completed 200 OK in 1298ms (Views: 0.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/notifications" for ::1 at 2016-03-31 22:25:47 -0500
+Processing by NotificationsController#index as HTML
+  [1m[35mNotification Load (0.1ms)[0m  SELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" DESC LIMIT 1
+Completed 200 OK in 1970ms (Views: 0.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/notifications" for ::1 at 2016-03-31 22:31:50 -0500
+Processing by NotificationsController#index as HTML
+  [1m[36mNotification Load (0.1ms)[0m  [1mSELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" DESC LIMIT 1[0m
+Completed 200 OK in 1284ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/notifications" for ::1 at 2016-03-31 22:31:55 -0500
+Processing by NotificationsController#index as HTML
+  [1m[35mNotification Load (0.1ms)[0m  SELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" DESC LIMIT 1
+Completed 200 OK in 714ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/notifications" for ::1 at 2016-03-31 22:34:15 -0500
+Processing by NotificationsController#index as HTML
+  [1m[36mNotification Load (0.1ms)[0m  [1mSELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" DESC LIMIT 1[0m
+Completed 200 OK in 734ms (Views: 0.2ms | ActiveRecord: 0.5ms)

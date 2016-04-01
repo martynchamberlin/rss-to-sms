@@ -16,9 +16,12 @@ class NotificationsController < ApplicationController
             title = item.xpath('title')[0].content
 
             if ( begin_sending )
+                # SMS limit is 140 and subtract additional for white space
+                max_title = 140 - link.length - 1
+                message = title[0..max_title] + " " + link
                 # send SMS
-                output += link
-                Notification.new({guid: link}).save
+                output += message
+                # Notification.new({guid: link}).save
             end
 
             if ( latestNotification.guid == link )
