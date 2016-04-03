@@ -1,23 +1,24 @@
-# rss-to-sms
+# RSS to SMS
+
 Sometimes you follow a site very closely and want an SMS whenever it publishes something new
 
-Be sure to run `bundle install` to install the project specific gems
+Be sure to run `bundle install` to install the project-specific gems
 
 Delicate environment variables are stored via https://github.com/elabs/econfig. They are:
 - phone
 - twilio_sid
 - twilio_token
 
-Installing pg for postgress required:
+Installing pg for postgress on Mac OS X El Capitan required:
 
-> sudo ARCHFLAGS="-arch x86_64" gem install pg
+   sudo ARCHFLAGS="-arch x86_64" gem install pg
 
-For Jekyll it's:
-  //item
-guid
-title
+For the necessary environment parameters you'll need to define the following:
 
-Outstanding items at this point:
-1. Get Twilio integrated into the site.
-2. Taylor the RSS tags to be specific to the target domain RSS, including shorturl param.
-3. Get pushed to Heroku and set up the cron job.
+- FROM_PHONE
+- TO_PHONE
+- TWILIO_ACCOUNT_SID
+- TWILIO_AUTH_TOKEN
+- RSS_URL
+
+Given how many of these there are, the command for starting the rails server is recommended to be stored in an alias. Also, these environment variables need to be prepended before any rake task that accesses them, too.
