@@ -2,7 +2,6 @@ class Notification < ActiveRecord::Base
 
 	def generate
 
-       latestNotification = Notification.last(1).first
         require 'open-uri'
         require 'twilio-ruby' 
         output = ''
@@ -10,42 +9,36 @@ class Notification < ActiveRecord::Base
 
         doc = Nokogiri::HTML(open(RssToSms.config.rss_url))
 
-        # returns true when, working our way from the bottom of the feed,
-        # we encounter the message we last notified about. Anything
-        # after that is gravy and needs to be sent.
-        latest_sent_found = false
-
         client = Twilio::REST::Client.new RssToSms.config.twilio_account_sid, RssToSms.config.twilio_auth_token 
+        notifications = Array.new;
 
-        doc.xpath('//entry').reverse_each do |item|
+        doc.xpath('//entry').each do |item|
             link = item.xpath('link')[1].attr('href')
             title = item.xpath('title')[0].content
 
-            if ( latest_sent_found )
-                # SMS limit is 140 and subtract additional for white space
-                max_title = 140 - link.length - 1
-                message = title[0..max_title] + " " + link
-                # send SMS
-                response = client.messages.create({
-                    :from => RssToSms.config.from_phone,  
-                    :to => RssToSms.config.to_phone,  
-                    :body => message
-                })
-                output += message
-                Notification.new({guid: link}).save
-            end
+            break if Notification.exists?(guid: link) 
 
-            if ( latestNotification and latestNotification.guid == link )
-                latest_sent_found = true
-            end
+            # SMS limit is 140 and subtract additional for white space
+            max_title = 140 - link.length - 1
+            message = title[0..max_title] + " " + link
+            notifications << {message: message, link: link}
+
         end
 
-        # if begin_sending was never set, that either means our DB is empty
-        # or it means that more than a full page of RSS items has run since
-        # the last time this code ran. In either case let's grab the latest
-        # post and insert it and then move on
-        if ( not latest_sent_found ) 
-            Notification.new({guid: link}).save
+        puts notifications.inspect
+
+        notifications.reverse_each do |notification|
+
+            Notification.new({guid: notification[:link]}).save
+
+            # send SMS
+            response = client.messages.create({
+                :from => RssToSms.config.from_phone,  
+                :to => RssToSms.config.to_phone,  
+                :body => message
+            })
+            output += notification[:message]
+
         end
 
         return output
