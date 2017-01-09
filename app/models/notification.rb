@@ -14,7 +14,7 @@ class Notification < ActiveRecord::Base
         num_checked = 0;
 
         doc.xpath('//entry').each do |item|
-            link = item.xpath('link')[1].attr('href')
+            link = item.xpath('link')[2].attr('href')
             title = item.xpath('title')[0].content
 
             # Sometimes publishers will rearrange their content and push out a new article that's
@@ -46,7 +46,7 @@ class Notification < ActiveRecord::Base
             response = client.messages.create({
                 :from => RssToSms.config.from_phone,
                 :to => RssToSms.config.to_phone,
-                :body => notification[:message]
+                :body => notification[:link]
             })
             output += notification[:message]
 
