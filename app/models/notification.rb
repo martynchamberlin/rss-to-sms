@@ -52,11 +52,13 @@ class Notification < ActiveRecord::Base
             Notification.new({guid: notification[:link]}).save
 
             # send SMS
-            response = client.messages.create({
+            if RssToSms.config?('enabled')
+              response = client.messages.create({
                 :from => RssToSms.config.from_phone,
                 :to => RssToSms.config.to_phone,
                 :body => notification[:message]
-            })
+              })
+            end
             output += notification[:message]
 
         end
