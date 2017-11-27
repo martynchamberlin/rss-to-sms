@@ -57,8 +57,12 @@ class Notification < ActiveRecord::Base
                 :from => RssToSms.config.from_phone,
                 :to => RssToSms.config.to_phone,
                 :body => notification[:message]
+<<<<<<< HEAD
               })
             end
+=======
+            })
+>>>>>>> aca5e6474cbd5b4b6848a8302dc7fe1c7b439d25
             output += notification[:message]
 
         end
